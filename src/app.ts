@@ -3,12 +3,12 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import IndexRoutes from './routes/index.routes';
-import {customerRoutes} from './routes/customer.routes';
+import { customerRoutes } from './routes/customer.routes';
 
 export class App {
     private app: Application;
 
-    constructor(private port?: number | string) {
+    constructor() {
         this.app = express();
         this.settings();
         this.middlewares();
@@ -16,14 +16,14 @@ export class App {
     }
 
     settings() {
-        this.app.set('port', this.port || process.env.PORT || 3000);
+        this.app.set('port', process.env.PORT || 3000);
     }
 
     middlewares() {
         this.app.use(morgan('dev'));
         this.app.use(cors());
         this.app.use(express.json());
-        this.app.use(express.urlencoded({extended: false}));
+        this.app.use(express.urlencoded({ extended: false }));
     }
 
     routes() {
